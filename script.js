@@ -13,42 +13,69 @@
 //use past present and future
 $(document).ready(function () {
 
-    init();
-
+    //init();
+    
     var currentDay = document.querySelector("#currentDay")
     currentDay.textContent = dayjs().format('dddd, MMMM, D')
+    hourArray = {
+        9: '#hour-9',
+        10: '#hour-10',
+        11: '#hour-11',
+        12: '#hour-12',
+        13: '#hour-13',
+        14: '#hour-14',
+        15: '#hour-15',
+        16: '#hour-16',
+        17: '#hour-17',
+    }
 
-
-    var currentHour = dayjs().format('H').toString()
+    var currentHour = parseInt(dayjs().format('H'))
     var currentMinute = dayjs().format('m').toString()
-    console.log(currentHour)
-    console.log(currentMinute)
-    $(document).ready()
+    
+    
+
     function init() {
-        var storedSchedule = JSON.parse(localStorage.getItem("savedSchedule"))
+        var storedSchedule = JSON.parse(localStorage.getItem("storedSchedule"))
         if (!storedSchedule) {
+            savedArray = storedSchedule
             return;
         }
-        savedSchedule = storedSchedule;
-        renderSchedule();
+        savedArray = new Array(9);
+        console.log(savedArray)
     }
-    function renderSchedule() {
-        for (var i = 0; i < savedSchedule.length; i++) {
-            var hour = savedSchedule[i];
 
+     function renderSchedule() {
+         for (var i = 0; i < savedArray.length; i++) {
+             $("")
+    
         }
-    };
+      };
 
     function savingSchedule() {
-        localStorage.setItem("savedSchedule", JSON.stringify(savedSchedule));
+        localStorage.setItem("storedSchedule", JSON.stringify(storedSchedule));
+
     }
 
 
     $(document).on("click", ".saveBtn", function () {
-        console.log($(this).prev().val());
-        console.log($(this).parent().attr("id"));
+        var scheduleText = $(this).prev().val().trim()
+        var scheduleID = $(this).parent().attr("id");
+        console.log(scheduleText)
+        console.log(scheduleID)
+        if (scheduleText === "") {
+            return;
+        }
+        
+
+
+        
     })
-
-
-
+    function colorChange() {
+        
+        }
+    
+    colorChange();
+    
+    
+    
 }); // ready function end
